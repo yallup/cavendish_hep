@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/*!
+ * Marp / Marpit IGGG theme.
+ *
+ * @theme github
+ * @author MATSUBARA Nobutada
+ * @size 4:3 960px 720px
+ * @size 16:9 1280px 720px
+ */
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/github.min.css");
+/* @import url("https://gist.github.com/LunarTwilight/8c851dc46a1f6875bca8d42a276c8621/raw/dark-cloudflare-dash.user.css"); */
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: hsl(190, 26%, 13%);
+  color: hsl(0, 26%, 90%);
+  font-size: 30px;
+  line-height: 1.35;
+  letter-spacing: 1.25px;
+  padding: 70px;
+  padding-top: 100px;
+  
+  font-family: 'Lato', 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif; }
+  section > *:first-child {
+    margin-top: -0.5em;
+    color:  hsl(0, 0, 100%);
+    position: absolute;
+    top: 10%;
+    border-bottom: 2px solid hsl(29, 84%, 51%); }
+  section strong {
+    color: hsl(29, 84%, 51%) }
+  section pre {
+    display: block;
+    margin: 1em 0 0 0;
+    min-height: 1em;
+    overflow: visible; }
+    section pre code {
+      box-sizing: border-box;
+      margin: 0;
+      min-width: 100%;
+      padding: 0.5em;
+      font-size: 0.7em;
+      background-color: hsl(0, 0%, 90%); }
+  section code {
+    display: inline-block;
+    font-family: 'NasuM', 'Roboto Mono', monospace;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    margin: -0.1em 0.15em;
+    padding: 0.1em 0.2em;
+    vertical-align: baseline;
+    background-color: hsl(0, 0%, 90%);
+    color: hsl(190, 26%, 13%); }
+
+section.red strong {
+  color: #cb2431; }
+
+section.lead {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  text-align: center; 
+  /* padding: 100px; */
+  padding-top: 100px;
+  /* color: hsl(190, 26%, 13%); */
+  color: hsl(0, 26%, 90%);
+  /* background-color: hsl(0, 0%, 90%);} */
+  background-color: hsl(190, 26%, 13%);}
+  /* background-color: hsl(29, 84%, 51%)} */
+  section.lead > *:first-child {
+    margin-top: -0.5em;
+    border-bottom: 1px solid hsl(29, 84%, 51%);
+    margin-top: 0; }
+
+
+section.lead.invert {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      text-align: center; 
+      /* padding: 100px; */
+      padding-top: 0px;
+      color: hsl(190, 26%, 13%);
+      background-color: hsl(0, 0%, 90%);}
+      /* background-color: hsl(0, 26%, 90%);} */
+      /* background-color: hsl(190, 26%, 13%);} */
+      /* background-color: hsl(29, 84%, 51%)} */
+      section.lead > *:first-child {
+        position: relative;
+        border-bottom: 0px solid hsl(29, 84%, 51%);
+        margin-top: 0; }
+
+/* section.split div.split {
+  columns: 2; } */
+
+/*# sourceMappingURL=github.css.map */

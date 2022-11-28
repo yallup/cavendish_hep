@@ -1,0 +1,11 @@
+/* @theme example */
+
+@import 'uncover';
+
+section {
+  background: #cef;
+  color: #135;
+  /* font-family: 'Times New Roman', serif !important; */
+}
+
+
