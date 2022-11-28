@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "rimraf dist && npm run -s og-image && npm run -s deck",
-    "deck": "marp --no-stdin dy_cavendish_hep.md -o dist/index.html && ncp assets dist/assets",
+    "deck": "marp --no-stdin dy_cavendish_hep.md --html -o dist/index.html && ncp assets dist/assets",
     "now-build": "npm run -s deck",
     "og-image": "marp dy_cavendish_hep.md -o dist/og-image.jpg",
     "start": "marp -ps ."
