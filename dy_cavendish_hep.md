@@ -83,7 +83,6 @@ Phase Space Nested sampling [[2205.02030]](https://arxiv.org/abs/2205.02030)
 
 ![bg right width:550](./assets/gambit.png)
 
-
 ----
 
 ### The Rosetta Stone

@@ -9,20 +9,22 @@
  */
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/github.min.css");
+@import 'https://fonts.bunny.net/css?family=Lato:400,900|Roboto+Mono:400,700&display=swap';
 /* @import url("https://gist.github.com/LunarTwilight/8c851dc46a1f6875bca8d42a276c8621/raw/dark-cloudflare-dash.user.css"); */
 section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: hsl(190, 26%, 13%);
-  color: hsl(0, 26%, 90%);
+  color: hsl(0, 0%, 90%);
   font-size: 30px;
   line-height: 1.35;
   letter-spacing: 1.25px;
   padding: 70px;
   padding-top: 100px;
   
-  font-family: 'Lato', 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif; }
+  font-family:  'Lato', -apple-system, BlinkMacSystemFont,'Segoe UI', sans-serif;}
+  /* 'Lato', 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif; } */
   section > *:first-child {
     margin-top: -0.5em;
     color:  hsl(0, 0, 100%);
@@ -66,7 +68,7 @@ section.lead {
   /* padding: 100px; */
   padding-top: 100px;
   /* color: hsl(190, 26%, 13%); */
-  color: hsl(0, 26%, 90%);
+  color: hsl(0, 0%, 90%);
   /* background-color: hsl(0, 0%, 90%);} */
   background-color: hsl(190, 26%, 13%);}
   /* background-color: hsl(29, 84%, 51%)} */
