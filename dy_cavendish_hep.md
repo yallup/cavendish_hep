@@ -44,7 +44,7 @@ section {
 <!-- &nbsp;
 &nbsp; -->
  _Cavendish HEP seminars_
- 1st November 2022
+ 6th December 2022
 
 ![height:100px](./assets/cam.png) 
 
@@ -52,14 +52,14 @@ section {
 
 ### Backstory
 
-![bg left width:600](./assets/contur.png)
+![bg left width:550](./assets/contur.png)
 
 Formerly HEP @ UCL, PhD. with Prof. Butterworth
 Viva by Prof. Potter [2019]
 
 Formerly ATLAS collaboration, although more time spent on MCnet activities, Herwig and Rivet/Contur
 
-Since 2021 PDRA in KICC, Cambridge. PI Dr Handley
+Since 2021 PDRA in KICC, Cambridge. w. Dr Handley and Prof. Hobson
 
 ----
 
@@ -81,7 +81,7 @@ Various parameter scanning [[2101.04525]](https://arxiv.org/abs/2101.04525)
 Phase Space Nested sampling [[2205.02030]](https://arxiv.org/abs/2205.02030)
 
 
-![bg right width:650](./assets/gambit.png)
+![bg right width:550](./assets/gambit.png)
 
 
 ----
@@ -266,6 +266,11 @@ __Features__
   * $\rightarrow$ More importantly, "tunes" any reasonable prior to posterior
 
 ----
+### Riemann vs Lebesgue
+
+![bg width:800](./assets/lebesgue.png)
+
+----
 
 ### Himmelblau function
 
@@ -349,18 +354,53 @@ HMC the workhorse for most lattice, but have to force these steps
 <!-- _class: invert lead -->
 
 # Diphotons and fitting in HEP
-
-
-----
-Discrete Profiling
-
-Closest analogue [[1408.6865]](https://arxiv.org/abs/1408.6865)
-
-ATLAS - Spurious signal tests
+The case for fitting models with MCMC
 
 ----
 
-Discrete Profiling
+### Background only 
+
+Fit to background only diphoton data
+
+Generated unknown data from LO QCD diphoton production (Herwig)
+
+Sample realisation of Poission noise data
+
+![bg right:60% width:700](./assets/predict_pres.png)
+
+----
+### Likelihoods
+
+$$
+\mathcal{L}(n_i \lvert \Theta) = \prod_i  b(x_i,\Theta)^{n_i} \frac{e^{-b(x_i,\Theta)}}{n_i!}
+$$
+
+$$
+    b(x_i,\Theta) = b(x_i,\theta,N,\phi) = \sum^N_k \phi_k(x_i,\theta)
+$$
+
+What we want $P(\theta,N,\phi \lvert n_i)$
+What we get out the box with frequentist inference $P(\hat\theta \lvert n_i, N,\phi )$
+
+How do we understand the discrete $\{N,\phi\}$?
+
+----
+### Discrete Profiling
+
+Closest analogue, CMS method [[1408.6865]](https://arxiv.org/abs/1408.6865)
+
+ATLAS, Spurious signal tests, not discussed here
+
+Treat each choice of $\{N,\phi\}$ as a discrete model
+$\rightarrow$ derive set of individual $P(\hat\theta \lvert n_i)_{\{N,\phi\}}$
+
+## But...
+
+Larger values of $N$ always prefered, have to derive a correction
+
+----
+
+### Discrete Profiling
 
 <center>
 
@@ -369,15 +409,14 @@ Discrete Profiling
 </center>
 
 
+
 ----
-Discrete Marginal
+### Pick some useful functions
 
 <div class="columns">
 <div>
 
-
 $$
-\footnotesize
     \phi= \mathrm{exp}:\\   b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m} \exp (-\theta_{2,m} x) \\
     \phi= \mathrm{power}: \\  b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m}  (x+1)^{-1.5\theta_{2,m}} \\
     \phi= \mathrm{logpoly}: \\  b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m} \log(x+e)^{-4\theta_{2,m}}
@@ -393,8 +432,24 @@ $$
 </div>
 
 ----
+### Choose some priors
 
-Discrete Marginal
+Basis amplitudes: ___sorted_ Uniform__, $\theta_1 \in  [-10,10]$ 
+$\rightarrow$ __nb:__ Does it make sense for this to be negative*? Hard likelihood boundary in NS makes this trivial, max likelihood approach not so clear 
+
+Basis exponent: __Uniform__, $\theta_2 \in  [0,5]$
+
+Hierarchical params: __Uniform integer__, $N,\phi \in \Z [1,3]$
+
+
+
+
+$\rightarrow$ assuming *, yields functions like $f(x) = e^{-x} \rightarrow$ smooth constantly decreasing
+$f'(x)<0, f''(x) > 0$ $\rightarrow$ desireable inductive bias
+
+----
+
+### Set the heights
 
 <center>
 
@@ -406,8 +461,23 @@ Bayesian: $\quad \ln\mathcal{Z}  = \langle \ln \mathcal{L} \rangle_P - D_\mathrm
 </center>
 
 ----
+### An optimial correction term
 
-Discrete Marginal
+
+Kullbeck-Leibler divergence:
+__Information gain between prior and posterior__
+
+$$
+D_\mathrm{KL} = \int d\theta P(\theta) \ln \frac{P(\theta)}{\Pi(\theta)}
+$$
+
+Quantifies How far apart the prior and posterior are
+
+![bg right:50% width:500px center](./assets/dkl.png)
+
+----
+
+### Find the probabilities
 
 <center>
 
@@ -419,39 +489,6 @@ Bayesian: $\quad P(N,\phi)= \frac{\mathcal{Z}_{N,\phi}}{\sum(\mathcal{Z}_{N,\phi
 </center>
 
 ----
-Discrete Marginal
-
-<div class="columns">
-<div>
-
-Kullbeck-Leibler divergence:
-__Information gain between prior and posterior__
-
-$$
-D_\mathrm{KL} = \int d\theta P(\theta) \ln \frac{P(\theta)}{\Pi(\theta)}
-$$
-
-</div>
-<div>
-
-![width:500px center](./assets/dkl.png)
-
-</div>
-</div>
-
-----
-
-### Background only 
-
-Fit to background only data
-
-Generated unknown data from LO QCD diphoton production (from MCEG)
-
-Sample realisation of Poission noise data
-
-![bg right:60% width:700](./assets/predict_pres.png)
-
-----
 
 ![bg width:1300](./assets/predict_ratio_pres.png)
 
@@ -460,15 +497,64 @@ Sample realisation of Poission noise data
 ![bg width:1300](./assets/bumphunt.gif)
 
 ----
+### Signal model
 
-###
+Generic Gaussian signal "bumphunt"
 
-![bg right:60% width:400](./assets/search_result.png)
+$$
+    H_\psi: \quad  \mathcal{L}(n_i \lvert \Psi,\Theta) = \prod_i \big(s(x_i,\psi) + b(x_i,\Theta)\big)^{n_i}\cdot \frac{e^{-(s(x_i,\psi) +  b(x_i,\Theta))}}{n_i!}
+$$
+
+$$
+s(x_i,\psi) = s(x_i,A,\mu,\sigma) = A \cdot \mathrm{Normal}(\mu,\sigma) 
+
+$$
+
+Amplitude: __Uniform__ $A \in  [0,500], A_\mathrm{true}=150$
+Mean: __Uniform__ $\mu \in  [100,180], \mu_\mathrm{true}=125$
+Variance: __Uniform__ $\sigma \in  [0.5,3], \sigma_\mathrm{true}=1$
+
+Narrow width generic signal search
+
+----
+### True positive - Type II errors
+
+$$\frac{\mathcal{Z}_\psi}{\mathcal{Z}_0} = \frac{P(H_\Psi)}{P(H_0)}= 9.29 \pm 1.37 $$ 
+
+Interpret as ~9:1 odds of $H_\Psi$ over $H_0$, roughly 90% confidence in $H_\Psi$
+
+_Evidence is all you need_ - Directly calculate the only thing I care about, well calibrated global odds.
+
+![bg right:50% width:400](./assets/search_result.png)
 
 ----
 
-![bg right:60% width:400](./assets/null_result.png)
+### Signal parameters
 
+Recover the true (dotted lines) signal parameters
+
+Resolve rich information about the model
+
+* __Discrete:__ Sample over $\{N,\phi\}$
+
+* __Fixed:__ Fix $\{N=2,\phi=\mathrm{exp}\}$
+
+Marginalising discrete parameters greatly improves signal inference
+
+![bg left:55% width:600](./assets/corner.png)
+
+----
+### False positive - Type I errors
+
+Arguably more important for unsupervised learning - repeat with no signal injected
+
+$$\frac{\mathcal{Z}_\psi}{\mathcal{Z}_0} = \frac{P(H_\Psi)}{P(H_0)}= 0.59 \pm 0.08 $$ 
+
+Null ~ twice as likely as BSM
+
+NS navigating both multimodal background and signal
+
+![bg right:60% width:400](./assets/null_result.png)
 
 ----
 
@@ -502,6 +588,17 @@ __[[2211.10391]](https://arxiv.org/abs/2211.10391)__
 
 Topics I'd like to think about more
 Topics I'd be interested in hearing more about
+
+----
+### ML anomaly detection 
+
+Renewed interest in leverage ML, beyond the bump hunt [[2101.08320]](https://arxiv.org/abs/2101.08320)
+
+Still often bump hunting (in latent space) $\rightarrow$ excellent candidate for more shape aware (discrete marginal) fitting
+
+A lot of approaches struggle with False positives $\rightarrow$ Bayesian amortization an excellent candidate
+
+![bg left:40% width:500](./assets/olympics.png)
 
 ----
 
@@ -550,222 +647,31 @@ __There is an answer to age old 2 point comparisons in HEP__
 
 ----
 
-----
+### Matrix elements
 
-#### Workhorse in HEP on this set of problems is Importance Sampling
-
-$$ \mathrm{Posterior} = \frac{\mathrm{Likelihood}\times \mathrm{Prior}}{\mathrm{Evidence}}\, $$
-
-- Replace problem of sampling from unknown $P(\Phi)$ with a known $Q(\Phi)$
-- Adjust importance of sample drawn from $Q$ by weighting, $w=\frac{P(\Phi)}{Q(\Phi)}$
-
-![height:400px center](./assets/vegas_ex.png)
-
-----
-
-#### Problem seemingly reduces to coming up with good mappings for target
-&nbsp;
-
-However, Even in $D=\mathcal{O}(10)$ Dimensions this starts to break. 
-- Massless glue scattering, $D=3n_g-4$:
-  - $gg\rightarrow 3g$, $D=5$
-  - $gg\rightarrow 4g$, $D=8$
-
-Even modern ML (normalising flows) won't save you [[2001.05478]](https://arxiv.org/abs/2001.05478)
-
-Algorithm | Efficiency $gg\rightarrow 3g$ | Efficiency $gg\rightarrow 4g$ 
------|:-----:|:-----:
-HAAG | 3.0% | 2.7% 
-Vegas | 27.7% | 31.8% 
-Neural Network | 64.3% | 33.6% 
-
-----
-
-## A sampling problem? Anyone for MCMC?
-
-Central problem:
-- Convergent integral means you have good posterior samples
-- __Reverse not true__, Samples from a convergent MCMC chain __not__ guaranteed a good integral
-- Multimodal targets well established failure mode.
-  - Multichannel decompositions in MCMC HEP, (MC)$^3$ [[1404.4328]](https://arxiv.org/abs/1404.4328)
-
-$$P(\Phi ) = \frac{ \mathcal{L}(\Phi) \Pi (\Phi)}{\mathcal{Z}} \propto \mathcal{L}(\Phi) \Pi (\Phi) $$
-&nbsp;
-
-_MCMC kicks in as we go to high dimensions, grey area between IS and MCMC, can ML help?_
-
-----
-# Gaussian Processes
-
-
-_Have we thrown the baby out with the bath water?_
-
-The success of Gaussian processes shows that many real-world data modelling problems are perfectly well solved by sensible smoothing methods. The most  interesting problems, the task of feature discovery for example, are __not__ ones that Gaussian processes will solve.
-
-_Mackay Inference_ 
-
-----
-
-## Where's the Evidence?
-
-In neglecting the Evidence ($\mathcal{Z}$) we have neglected precisely the quantity we want,
-
+Pose phase space integration as [[2205.02030]](https://arxiv.org/abs/2205.02030)
 $$ \sigma = \int\limits_\Omega d\Phi |\mathcal{M}|^2 (\Phi)\, $$
 $$ \mathcal{Z} = \int d\theta \mathcal{L} (\theta) \Pi (\theta)\, $$
-
-- Mapping $\rightarrow$ Prior
-- Matrix element $\rightarrow$ Likelihood
-- Cross section $\rightarrow$ Evidence
-
-----
-## Pillars of Bayesian inference
-
-<div class="columns">
-<div>
-
-## Parameter Inference
-
-What most people think of
-$$P(\Phi ) \propto \mathcal{L}(\Phi) \Pi (\Phi) $$
-
-Not strictly an integral problem
-
-</div>
-<div>
-
-## __Model Comparison__
-
-An "Evidence first" approach, concentrate on issues of model comparison
-
-* Historically HARD
-
-$$\mathcal{Z} = \int d\Phi \mathcal{L}(\Phi) \Pi (\Phi) $$
-
-</div>
-</div>
-
-----
-## Nested Sampling
-
-Nested Sampling [[Skilling 2006]](https://projecteuclid.org/journals/bayesian-analysis/volume-1/issue-4/Nested-sampling-for-general-Bayesian-computation/10.1214/06-BA127.full), implemented for in PolyChord [[1506.00171]](https://arxiv.org/abs/1506.00171). Is a good way to generically approach this problem for $\mathcal{O}(10)\rightarrow \mathcal{O}(100)$ dimensions
-
-- Primarily an integral algorithm (largely unique vs other MCMC approaches)
-
-- Designed for multimodal problems from inception 
-
-- Requires construction that can sample under hard likelihood constraint
-
-- Largely self tuning
-
-  - Little interal hyperparameterization
-  - More importantly, tunes any reasonable prior to posterior
-
-----
-# Takeaways
-
-Integrals are useful
-
-Gradients maybe aren't _all_ you need
-
-----
-<!-- _class:  lead -->
-
-[[yallup.github.io/bayeshep_durham]](https://yallup.github.io/bayeshep_durham/) for animated versions
-
-![height:600px](./assets/bumphunt.gif)
-
-----
-
-<!-- _class: lead -->
-
-rastrigin
-
-![height:500px](./assets/rastrigin.gif)
+Explore scale choice as model comparison problem 
+__nb:__ ME as Likelihood, __not__ fitting to data
 
 
-
-----
-<!-- _class: invert lead-->
-
-
-![width:1100px](./assets/dead.png)
-
-
-----
-<!-- _class: invert lead-->
-
-
-![height:700px](./assets/gluon_4j_animation.gif)
-
-
-----
-<!-- _class: invert lead-->
-
-Unweighted Events 
-
-![width:1100px](./assets/jet_pT_1.png)
-
-----
-<!-- _class: invert lead-->
-
-![bg height:400px right:50%](./assets/efficiencies.png)
-
-Algorithm |  $gg\rightarrow 3g$ |  $gg\rightarrow 4g$  |  $gg\rightarrow 5g$
------|:-----:|:-----: |:-----:
-HAAG | 3.0% | 2.7% | 2.8%
-Vegas (cold start) | 2.0% | 0.05% | 0.01% 
-NS | 1.0% | 1.0% | 1.0%  
-
+![bg left:55%](./assets/gluon_4j_animation.gif)
 
 
 ----
 
-## Where do we go from here?
 
-End to end stylised version of the problem demonstrated. 
+<!-- _class: invert lead -->
 
-This is deeper than coming up with a new way of mapping phase space
+# Conclusion
 
-![h:400 center](./assets/jenga.png)
 
-----
+### Fine detail of model comparison problems are (for my money) increasingly coming to the fore of particle physics
 
-## Where do we go from here? 
-(dedicated section in paper)
+### Bayesian Inference is a natural way to construct model comparison problems
 
-- _Physics challenges_
+### Nested Sampling has been demonstrated as indispensible for model comparison without approximations in Cosmology
 
-- Variants of NS algorithm
-
-- Prior information
-
-- Fitting this together with modern ML
-
-----
-
-## Physics challenges
-
-The fundamental motivation for this work came from recognising not just an ML challenge but a physics challenge [[2004.13687]](https://arxiv.org/abs/2004.13687)
-
-LO dijet isn't hard, NNNLO is. If your method isn't robust in these limits it doesn't solve the right problem. Unique features of NS open up interesting physics:
-
-- __No mapping required:__ NLO proposals generically harder, NNLO more so 
-- __No channel decomposition:__ can we be _really_ clever when it comes to counter events, negative events etc. with this?
-- __Computation scaling guaranteed__ to $\sim$ polynomial with $D$, other methods exponential: We can do _genuinely_ high dimensional problems, $gg\rightarrow 10g$ anyone?
-
-----
-## Conclusion
-
-In my opinion (your milage may vary)
-<!-- Event generation is a Markov Chain sampling process (despite what you may have been told), needing stochastic refinement is inevitable. -->
-
-<!-- Event Generation is fundamentally an inversion of a Conditional probability, Bayesian inference (and hence Markov Chains) are the (IMO) proper language for this problem -->
-
-- The fundamental problem for LHC event generation trying to do Importance Sampling in high dimension.
-
-- Machine learning can and will be useful, but this is not __just__ a machine learning mapping problem. 
-
-- This __is__ a Bayesian inference problem, precisely calculating Evidences or Posterior sampling. 
-
-- Nested Sampling is a high dimensional integration method, primarily from Bayesian Inference, that is an excellent choice for particle physics integrals
+## Thanks for listing
 
