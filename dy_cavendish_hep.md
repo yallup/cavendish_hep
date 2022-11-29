@@ -417,8 +417,12 @@ Larger values of $N$ always prefered, have to derive a correction
 <div>
 
 $$
-    \phi= \mathrm{exp}:\\   b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m} \exp (-\theta_{2,m} x) \\
-    \phi= \mathrm{power}: \\  b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m}  (x+1)^{-1.5\theta_{2,m}} \\
+    \phi= \mathrm{exp}:\\   b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m} \exp (-\theta_{2,m} x)
+$$
+$$
+    \phi= \mathrm{power}: \\  b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m}  (x+1)^{-1.5\theta_{2,m}}
+$$
+$$
     \phi= \mathrm{logpoly}: \\  b(x,\theta, N) = \sum_{m=1}^{N_{\mathrm{max}}} \theta_{1,m} \log(x+e)^{-4\theta_{2,m}}
 
 $$
@@ -439,7 +443,7 @@ $\rightarrow$ __nb:__ Does it make sense for this to be negative*? Hard likeliho
 
 Basis exponent: __Uniform__, $\theta_2 \in  [0,5]$
 
-Hierarchical params: __Uniform integer__, $N,\phi \in \Z [1,3]$
+Hierarchical params: __Uniform integer__, $N,\phi \in  (1,3)$
 
 
 
