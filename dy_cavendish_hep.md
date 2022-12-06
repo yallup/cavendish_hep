@@ -48,6 +48,8 @@ section {
 
 ![height:100px](./assets/cam.png) 
 
+[yallup.github.io/cavendish_hep]
+
 ----
 
 ### Backstory
@@ -81,7 +83,7 @@ Various parameter scanning [[2101.04525]](https://arxiv.org/abs/2101.04525)
 Phase Space Nested sampling [[2205.02030]](https://arxiv.org/abs/2205.02030)
 
 
-![bg right width:550](./assets/gambit.png)
+![bg right:45% width:550](./assets/gambit.png)
 
 ----
 
@@ -157,6 +159,23 @@ Not strictly an integral problem -->
 </div>
 </div>
 
+----
+<!-- _class:  lead -->
+
+_
+
+<div class="columns">
+<div>
+
+![height:500](./assets/frequentists_vs_bayesians.png)
+
+</div>
+<div>
+
+![height:500](./assets/wasserstein.png)
+
+</div>
+</div>
 
 ----
 
@@ -190,7 +209,16 @@ A potential aside on 5$\sigma$ -->
 * ### Is HEP exceptional (compared to Bayesian dominated fundamental physics fields e.g. Cosmology?) Or have we missed a trick?
 
 ----
-## A historic debate $-$ Hypothesis testing
+### A historic debate - troubling reading?
+
+Peter Clifford, cont.
+
+_Early statisticians saw benefits in devising simple rules for testing the null hypothesis...__“time is precious – analyse the data and move on to the next client”__. The statistician’s perspective was made explicit by Neyman._
+... 
+_Neyman’s advice was to control the frequency of Type I error within this ensemble. __In other words, in your career as a statistician, arrange that the frequency of rejecting null hypotheses incorrectly is no more than, say, 5%.___
+
+----
+### A historic debate $-$ Hypothesis testing
 
 A lot of ink spilled about this topic, my 2c,
 
@@ -282,7 +310,7 @@ $$
 
 Multimodal function, (exponential of square ~ Gaussian)
 
-Four identical local minima
+Four identical local maxima
 
 
 ![bg right](./assets/himmelblau.png)
@@ -396,6 +424,8 @@ $\rightarrow$ derive set of individual $P(\hat\theta \lvert n_i)_{\{N,\phi\}}$
 ## But...
 
 Larger values of $N$ always prefered, have to derive a correction
+
+![bg left:40% width:550](./assets/disc_prof.png)
 
 ----
 
@@ -601,11 +631,12 @@ Still often bump hunting (in latent space) $\rightarrow$ excellent candidate for
 
 A lot of approaches struggle with False positives $\rightarrow$ Bayesian amortization an excellent candidate
 
-![bg left:40% width:500](./assets/olympics.png)
+![bg left:40% width:500](./assets/bhls.png)
 
 ----
 
 ### Look Elsewhere Effect
+
 
 
 $$\frac{\mathcal{Z}_\psi}{\mathcal{Z}_0}= 9.29 \pm 1.37 $$ 
@@ -631,15 +662,15 @@ $$
 
 Small modelling differences can lead to large variance in parameters.
 
-Less my area but PDFs really _feel_ like a Bayesian problem (lot's of $\chi^2$, Hessian approximations etc.)
+Less my area but can aspects of PDFs be approached with Bayesian paradigm ($\chi^2$ fits, Hessian approximations etc.)
 
-![bg right:40% width:450](./assets/pdfs.png)
+![bg right:50% width:550](./assets/highmassdijet.png)
 
 
 ----
 ### Soft models
 
-![bg left:40% width:450](./assets/soft.png)
+![bg left:40% width:500](./assets/nsubjets.png)
 
 Tuning soft models already noted to be $\sim$ both BSM searches [[professor]](https://professor.hepforge.org/), already preliminarily posed as a Nested Sampling problem
 

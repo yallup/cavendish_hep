@@ -15,7 +15,9 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: hsl(190, 26%, 13%);
+  background-color: #282a36;
+  /* background-color: hsl(190, 26%, 13%); */
+  /* background-color: linear-gradient(to bottom, hsl(190, 26%, 13%),hsl(193, 24%, 7%)); */
   color: hsl(0, 0%, 90%);
   font-size: 30px;
   line-height: 1.35;
@@ -26,11 +28,12 @@ section {
   font-family:  'Lato', -apple-system, BlinkMacSystemFont,'Segoe UI', sans-serif;}
   /* 'Lato', 'Avenir Next', 'Avenir', 'Trebuchet MS', 'Segoe UI', sans-serif; } */
   section > *:first-child {
+    /* fill: aliceblue; */
     margin-top: -0.5em;
-    color:  hsl(0, 0, 100%);
+    color: hsl(0, 0%, 90%);
     position: absolute;
     top: 10%;
-    border-bottom: 2px solid hsl(29, 84%, 51%); }
+    border-bottom: 3px solid hsl(29, 84%, 51%); }
   section strong {
     color: hsl(29, 84%, 51%) }
   section pre {
@@ -70,7 +73,8 @@ section.lead {
   /* color: hsl(190, 26%, 13%); */
   color: hsl(0, 0%, 90%);
   /* background-color: hsl(0, 0%, 90%);} */
-  background-color: hsl(190, 26%, 13%);}
+  /* background-color: hsl(190, 26%, 13%);} */
+  background-color: #282a36;}
   /* background-color: hsl(29, 84%, 51%)} */
   section.lead > *:first-child {
     margin-top: -0.5em;
@@ -93,6 +97,7 @@ section.lead.invert {
       /* background-color: hsl(29, 84%, 51%)} */
       section.lead > *:first-child {
         position: relative;
+        color: hsl(190, 26%, 13%);
         border-bottom: 0px solid hsl(29, 84%, 51%);
         margin-top: 0; }
 
