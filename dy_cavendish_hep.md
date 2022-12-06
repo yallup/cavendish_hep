@@ -280,6 +280,11 @@ A lot of ink spilled about this topic, my 2c,
 
 
 ----
+### Particle physics integrals
+
+![bg width:1000](./assets/vegas_ex.png)
+
+----
 ## Nested Sampling
 
 Nested Sampling [[Skilling 2006]](https://projecteuclid.org/journals/bayesian-analysis/volume-1/issue-4/Nested-sampling-for-general-Bayesian-computation/10.1214/06-BA127.full), implemented for in PolyChord [[1506.00171]](https://arxiv.org/abs/1506.00171). Is a good way to generically approach this problem for $\mathcal{O}(10)\rightarrow \mathcal{O}(100)$ dimensions
